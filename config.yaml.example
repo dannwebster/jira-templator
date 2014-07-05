@@ -1,1 +1,3 @@
-- server : https://contegixapp1.livenation.com/jira/rest/api/
+- jira : https://<hostname>/jira/rest/api/
+- username : <username>
+- project_id : <project_id>

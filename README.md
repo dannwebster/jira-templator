@@ -5,17 +5,17 @@
 %> sudo su
 %> curl https://bootstrap.pypa.io/ez_setup.py -o - | python
 %> easy_install pyyaml
+%> easy_install requests
+
+%> cp config.yaml.example ~/config.yaml
+%> vi ~/config.yaml # and fill in with your project as shown below
 
 == Configuration
 Values set in config.yaml are overridden if the same option is set in the command line options
 config.yaml
-- server : root URL of JIRA
-    - host : host name of server
-    - base_path : base path of server
-- project : project to add to
-    - name : name of project to add to
-    - id : id of project to add to
-
+- jira : root URL of JIRA
+- project_id : JIRA api id of your project
+- username : JIRA username
 
 === Options ===
     -c, --config : full path to config file (defaults to !/config.yaml)
