@@ -1,0 +1,23 @@
+- Clarify requirements
+- Architectural review
+- Code implementation
+- Ensure relevant data is logged into Splunk
+- Ensure relevant data is pushed into OpenTSDB (tmps-metrics)
+- Create relevant Metrilyx graphs
+- Create relevant Zabbix alerts
+- Unit tests
+- Create Automated BDD tests in Cucumber
+- Create Automated Functional tests in SoapUI
+- Update documentation
+- Peer code review
+- Peer code review of implementation
+- Peer code review of metrics/montiors/alerts
+- Create Automated tests
+- Test on branch
+- Merge to Trunk/Master
+- Run automated tests
+- Integration testing
+- Performance testing
+- Update release documentation
+- Review release documentation
+- Deployment to production

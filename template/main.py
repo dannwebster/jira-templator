@@ -5,10 +5,11 @@ import os.path
 from os.path import expanduser
 from optparse import OptionParser
 from collections import namedtuple
-from template.util import die
-from template.config import Config
-from template.password import Password
-from template.jira import Jira
+from config import Config
+from password import Password
+from jira import Jira
+from template import Template
+from util import die
 
 
 # constants
@@ -74,6 +75,7 @@ def main():
     password = Password()
     config = Config(password.password, template, options, config_dict)
     jira = Jira(config.jira, config.username, config.password)
+    template = Template(config.template_dir, config.template)
 
     if config.is_story():
         print "Creating story with description: '%s'" % config.story
@@ -81,6 +83,7 @@ def main():
     else:
         print "Adding sub-tasks to issue: '%s'" % config.issue
         r = jira.get_issue(config.issue)
+        template.dosubtasks()
         print r.json()
 
     password.cache_password()
