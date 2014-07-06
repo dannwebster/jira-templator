@@ -7,7 +7,7 @@ from optparse import OptionParser
 from collections import namedtuple
 from config import Config
 from password import Password
-from jira import Jira
+from jira.client import JIRA
 from template import Template
 from util import die
 
@@ -18,6 +18,9 @@ from util import die
 """
 -- Required
     template : the name of the template to use (from dir specified by -d option)
+
+-- Options
+    -a, --all : automatically create all of the subtasks in the template
 
 -- One of these is required
     -s, --story : Story text to use for the parent story
@@ -39,6 +42,10 @@ def main():
 
     # Defaulted
     parser.add_option("-c", "--config", dest="config", help="full path to YAML config file", default=Config.DEFAULT_CONFIG_FILE)
+
+    # Defaulted
+    parser.add_option("-a", "--all", dest="auto_all", action="store_true", help="automatically create all of the subtasks in the template")
+
 
     # One of these is required
     parser.add_option("-s", "--story", dest="story" , help="Story text to use for the parent story")
@@ -74,17 +81,22 @@ def main():
 
     password = Password()
     config = Config(password.password, template, options, config_dict)
-    jira = Jira(config.jira, config.username, config.password)
     template = Template(config.template_dir, config.template)
 
+    options = {
+        'server': config.jira,
+        'rest_api_version' : "latest",
+    }
+    jira = JIRA(options, basic_auth=(config.username, config.password))
     if config.is_story():
         print "Creating story with description: '%s'" % config.story
         r = jira.create_issue(config.story)
     else:
         print "Adding sub-tasks to issue: '%s'" % config.issue
-        r = jira.get_issue(config.issue)
-        template.dosubtasks()
-        print r.json()
+        template.do_subtasks(config.auto_all)
+        issue = jira.issue(config.issue)
+        print issue.fields.subtasks
+        print issue
 
     password.cache_password()
 

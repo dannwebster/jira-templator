@@ -32,6 +32,9 @@ class Config:
         self.template = template
         self.story = options.story
         self.issue = options.issue
+        print "options.auto_all: %s" % options.auto_all
+        print "config_dict.auto_all: %s" % config_dict["auto_all"]
+        self.auto_all = Config.opt_or_conf(options, config_dict, "auto_all")
         self.jira = Config.opt_or_conf(options, config_dict, "jira")
         self.project_id = Config.opt_or_conf(options, config_dict, "project_id")
         self.username = Config.opt_or_conf(options, config_dict, "username")

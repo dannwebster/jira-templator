@@ -6,6 +6,7 @@
 %> curl https://bootstrap.pypa.io/ez_setup.py -o - | python
 %> easy_install pyyaml
 %> easy_install requests
+%> easy_install jira
 
 %> cp config.yaml.example ~/config.yaml
 %> vi ~/config.yaml # and fill in with your project as shown below
