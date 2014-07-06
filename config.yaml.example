@@ -1,3 +1,7 @@
-- jira : https://<hostname>/
-- username : <username>
-- project_id : <project_id>
+jira : https://<hostname>/jira
+username : <username>
+project_id : <project_id>
+assignee : <assignee>
+auto_all : True
+issue_config :
+    customfield_10891: [ { "value": "Resale" } ]

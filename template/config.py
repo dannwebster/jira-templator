@@ -22,6 +22,7 @@ class Config:
         if config.username is None: die("username required")
         if config.password is None: die("password required")
         if config.template is None: die("template required")
+        if config.assignee is None: die("assignee required")
         if config.template_dir is None: die("template_dir required")
         if config.story is None and config.issue is None : die("story or issue is required")
         if config.jira is None: die("jira required")
@@ -35,6 +36,7 @@ class Config:
         print "options.auto_all: %s" % options.auto_all
         print "config_dict.auto_all: %s" % config_dict["auto_all"]
         self.auto_all = Config.opt_or_conf(options, config_dict, "auto_all")
+        self.assignee = Config.opt_or_conf(options, config_dict, "assignee")
         self.jira = Config.opt_or_conf(options, config_dict, "jira")
         self.project_id = Config.opt_or_conf(options, config_dict, "project_id")
         self.username = Config.opt_or_conf(options, config_dict, "username")
